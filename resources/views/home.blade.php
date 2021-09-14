@@ -15,7 +15,7 @@
                     @endif
 
                     <a href="/posts/create" class="btn btn-primary">Create Post</a>
-                    <h3>Your blog post</h3>
+                    <h3>Waiting for approval</h3>
                     @if(count($posts) > 0)
                     <table class="table table-striped">
                         <tr>

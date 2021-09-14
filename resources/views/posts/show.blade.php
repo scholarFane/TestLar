@@ -5,7 +5,6 @@
 	<h1>{{$post->title}}</h1>
 	<small>Written on {{$post->created_at}}</small>
 	<hr>
-	{{-- Delete the buttons for editting and deleting --}}
 	<p>{!! nl2br(e($post->body)) !!}</p>
 	<hr>
 @endsection
