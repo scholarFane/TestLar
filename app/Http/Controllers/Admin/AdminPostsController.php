@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Http\Controllers\Controller;
 
 class AdminPostsController extends Controller
 {
@@ -14,8 +15,8 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->where('post_status', '=', '0');
-        return view('admin.index')->with('posts', $posts);
+        $posts = Post::getNotApprovedPosts();
+        return view('admin.index', compact('posts'));
     }
 
     /**
@@ -70,7 +71,7 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::find($id);
+        $post = Post::getPost($id);
         $post->post_status = true;
         $post->save();
         return redirect('/admin');

@@ -14,9 +14,9 @@
                         </div>
                     @endif
 
-                    <a href="/posts/create" class="btn btn-primary">Create Post</a>
+                    <a href="{{ route('posts.create') }}" class="btn btn-primary">Create Post</a>
                     <h3>Waiting for approval</h3>
-                    @if(count($posts) > 0)
+                    @if(isNotEmpty($posts))
                     <table class="table table-striped">
                         <tr>
                             <th>Title</th>
@@ -26,7 +26,7 @@
                         @foreach($posts as $post)
                         <tr>
                             <th>{{$post->title}}</th>
-                            <th><a href="/posts/{{$post->id}}/edit" class="btn btn-primary">Edit</a></th>
+                            <th><a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Edit</a></th>
                             <th></th>
                         </tr>
                         @endforeach

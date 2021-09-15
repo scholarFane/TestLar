@@ -15,8 +15,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->where('post_status', '=', '1');
-        return view('posts.index')->with('posts', $posts);
+        $posts = Post::getApprovedPosts() ;
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -44,7 +44,7 @@ class PostsController extends Controller
         $post->user_id = auth()->user()->id;
         $post->post_status = false;
         $post->save();
-        return redirect('/posts')->with('success', 'Post created');
+        return redirect('/posts');
 
     }
 
@@ -56,8 +56,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
-        return view('posts.show')->with('post', $post);
+        $post = Post::getPost($id);
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -68,8 +68,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
-        return view('posts.edit')->with('post', $post);
+        $post = Post::getPost($id);
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -86,7 +86,7 @@ class PostsController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->save();
-        return redirect('/posts')->with('success', 'Post updated');
+        return redirect('/posts');
     }
 
     /**
@@ -97,8 +97,8 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::find($id);
+        $post = Post::getPost($id);
         $post->delete();
-        return redirect('/posts')->with('success', 'Post removed');
+        return redirect('/posts');
     }
 }

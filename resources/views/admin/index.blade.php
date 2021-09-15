@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        <a href="/posts/create" class="btn btn-primary">Create Post</a>
+                        <a href="{{ route('posts.create') }}" class="btn btn-primary">Create Post</a>
                         <h3>Waiting List</h3>
                         @if(count($posts) > 0)
                         <table class="table table-striped">
@@ -26,9 +26,9 @@
                             @foreach($posts as $post)
                             <tr>
                                 <th>{{$post->title}}</th>
-                                <th><a href="/posts/{{$post->id}}/edit" class="btn btn-primary">Edit</a></th>
+                                <th><a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Edit</a></th>
                                 <th>
-                                {!! Form::open(['action' => ['App\Http\Controllers\AdminPostsController@update', $post->id], 'method' => 'POST']) !!}
+                                {!! Form::open(['action' => ['App\Http\Controllers\Admin\AdminPostsController@update', $post->id], 'method' => 'POST']) !!}
                                 {{Form::hidden('_method', 'PUT')}}
                                 {{Form::submit('Submit', ['class' => 'btn btn-danger'])}}
                                 {!! Form::close() !!}
