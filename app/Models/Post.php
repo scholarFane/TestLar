@@ -9,8 +9,8 @@ class Post extends Model
 {
     use HasFactory;
 
-    public function user() {
-        return $this->belongsTo('App\Models\Users');
+    public function User() {
+        return $this->belongsTo('App\Models\User');
     }
 
     public static function getPosts() {
@@ -32,6 +32,10 @@ class Post extends Model
     public static function getApprovedPosts() {
         $posts = Post::all()->where('post_status', '=', '1');
         return $posts;
+    }
+
+    public function Comment() {
+        return $this->belongsTo('App\Models\Comment');
     }
 
 }
